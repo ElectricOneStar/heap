@@ -6,7 +6,7 @@ using namespace std;
 char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter);
 void maxSize(char* inputHeap, int* wordSize);
 char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* sortedHeap, int* wordSize, int* counterTwo);
-void PrintHeap(int* sortedHeap, int* counterTwo);
+void PrintHeap(int* sortedHeap, int* counterTwo, int* index);
 int main(){
   char input[30];
   char inputTwo[30];
@@ -19,9 +19,10 @@ int main(){
   int* wordCounter = new int;
   int* wordSize = new int;
   int* counterTwo = new int;
+  int* heapSize = new int;
   (*counterTwo) = 0;
   (*wordCounter) = 0;
-  (*index) = 0;
+  (*index) = 1;
   (*counterOne) = -1;
   (*wordSize) = 1;
   do{
@@ -53,11 +54,21 @@ int main(){
   }
   while(strcmp(input, "file") != 0 && strcmp(input, "string") != 0);
   maxSize( inputHeap, wordSize);
-  createHeap(inputHeap, index, parcedChar, counterOne, wordCounter, sortedHeap, wordSize, counterTwo);
+   createHeap(inputHeap, index, parcedChar, counterOne, wordCounter, sortedHeap, wordSize, counterTwo);
 
   // cout << (*wordSize) << endl;
-  // cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
-  //(*parcedChar) = NULL;
+  
+   //   (*index)++;
+   /*
+   cout << (*index) << endl;
+  cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
+  /*
+  (*index)++;
+   cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
+   (*index)++;
+    cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
+  */
+   //(*parcedChar) = NULL;
   //parcedChar[0] = '\0';
   //cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
   //cout << ".";
@@ -67,45 +78,66 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
   cout << "BUILD THE HEAP" << endl;
   cout << (*wordSize) << endl;
   // sortedHeap[(*index)] = 1;
-     (*index)++;
+  //(*index)++;
   //  cout << sizeof(sortedHeap) / 8 << endl;
-    while( sizeof(sortedHeap) / 8 != (*wordSize)){
-      cout << "tree: ";
-      PrintHeap( sortedHeap, counterTwo);
-      cout << "size of tree: ";
-      cout << sizeof(sortedHeap) / 8 << endl;
- cout << "index: ";
+     while((*index)-1 != (*wordSize)){
+       /*
+       cout << "tree: ";
+      PrintHeap( sortedHeap, counterTwo, index);
+      (*counterTwo) = 0;
+       */
+       cout << "size of tree: ";
+      // cout << sizeof(sortedHeap) / 8 << endl;
+      // cout << sizeof(sortedHeap)/sizeof(sortedHeap[0]) << endl;
+ cout << "and index: ";
  cout << (*index) << endl;
- sortedHeap[(*index)] = 1;
-       (*index)++;
+ /*
+ cout << "char: ";
+   cout << parce(inputHeap, index - 1,  parcedChar, counterOne, wordCounter) << endl;
+ sortedHeap[(*index)] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter));
+ */
+ cout << (*index) << endl;
+  sortedHeap[(*index)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter))-48;
+ cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter) << endl;
+ //(*counterOne) = 0;
+ //(*wordCounter) = 0;
+ // sortedHeap[(*index)] = 1;
+       cout << "tree: ";
+      PrintHeap( sortedHeap, counterTwo, index);
+      (*counterTwo) = 0;
+      
+        cout << (*wordSize) << endl;
+ (*index)++;
+ cout << (*index) << endl;
     }
 }
 char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter){
+  (*counterOne) = 0;
    for(int i = 0; i < strlen(inputHeap); i++){
-      cout << "Here" << endl;
+     // cout << "Here" << endl;
       //      if(inputHeap[i] == '\0'){
       //   return parcedChar;
       // }
          if(inputHeap[i] != ' '){
 	   parcedChar[(*wordCounter)] = inputHeap[i];
-	   cout << "HereThere" << endl;
+	   //	   cout << "HereThere" << endl;
 	   (*wordCounter)++;
 	   
 	 }
      if(inputHeap[i] == ' '){
-       cout << "Here2" << endl;
+       // cout << "Here2" << endl;
        (*counterOne)++;
      
      if((*counterOne) == (*index)){
-       cout << "Here3" << endl;
-       (*index)++;
+       //cout << "Here3" << endl;
+       //(*index)++;
        (*counterOne) = -1;
        (*wordCounter) = 0;
        // parcedInt =
        return parcedChar;
      }
      else{
-       cout << "Here4" << endl;
+       //cout << "Here4" << endl;
        //(*parcedChar) = NULL;
        parcedChar[0] = '\0';
        (*wordCounter) = 0;
@@ -113,7 +145,10 @@ char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int*
      }
    }
    // if(inputHeap[i] == '\0'){
-        return parcedChar;
+          (*counterOne) = -1;
+       (*wordCounter) = 0;
+
+   return parcedChar;
 	// }
 }
 void maxSize(char* inputHeap, int* wordSize){
@@ -123,9 +158,9 @@ void maxSize(char* inputHeap, int* wordSize){
 	 }
   }
 }
-void PrintHeap(int* sortedHeap, int* counterTwo){
+void PrintHeap(int* sortedHeap, int* counterTwo, int* index){
 
-  while((*counterTwo) == sizeof(sortedHeap) / 8){
+  while((*counterTwo) != (*index)){
     // cout << (*counterTwo) << endl;
     // cout << 
     cout << sortedHeap[(*counterTwo)] << " ";
@@ -133,3 +168,12 @@ void PrintHeap(int* sortedHeap, int* counterTwo){
   }
   cout << endl;
 }
+/*
+int* SizeofHeap(int* sortedHeap, int* heapSize){
+  while(sortedHeap ){
+  (*heapSize)++;
+
+  }
+  return heapSize;
+}
+*/
