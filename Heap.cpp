@@ -7,6 +7,9 @@ char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int*
 void maxSize(char* inputHeap, int* wordSize);
 char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* sortedHeap, int* wordSize, int* counterTwo, int* sortCounter);
 void PrintHeap(int* sortedHeap, int* counterTwo, int* index);
+void PrintSpace(int* spaceNumber);
+void PrintVisual(int* sortedHeap, int* spaceNumber, int* visualCounter, int* left, int* right);
+void PrintBranch(int* direction);
 int main(){
   char input[30];
   char inputTwo[30];
@@ -21,6 +24,14 @@ int main(){
   int* counterTwo = new int;
   int* heapSize = new int;
   int* sortCounter = new int;
+  int* spaceCounter = new int;
+  int* visualCounter = new int;
+  int* left = new int;
+  int* right = new int;
+  int* LZeroROne = new int;
+  (*LZeroROne) = 0;
+  (*visualCounter) = 1;
+  (*spaceCounter) = 10;
   (*counterTwo) = 0;
   (*wordCounter) = 0;
   (*index) = 1;
@@ -56,7 +67,8 @@ int main(){
   while(strcmp(input, "file") != 0 && strcmp(input, "string") != 0);
   maxSize( inputHeap, wordSize);
   createHeap(inputHeap, index, parcedChar, counterOne, wordCounter, sortedHeap, wordSize, counterTwo, sortCounter);
-
+  cout << "visual" << endl;
+  PrintVisual(sortedHeap, spaceCounter, visualCounter, left, right);
   // cout << (*wordSize) << endl;
   
    //   (*index)++;
@@ -126,6 +138,8 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
  (*index)++;
  //cout << (*index) << endl;
     }
+     //cout << "visual" << endl;
+     //PrintVisual(i sortedHeap, spaceNumber);
 }
 char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter){
   (*counterOne) = 0;
@@ -193,3 +207,26 @@ int* SizeofHeap(int* sortedHeap, int* heapSize){
   return heapSize;
 }
 */
+void PrintVisual(int* sortedHeap, int* spaceNumber, int* visualCounter, int* left, int* right){
+  PrintSpace(spaceNumber);
+   cout << sortedHeap[(*visualCounter)-1]<< endl;
+   //(*visualCounter)++;
+   (*left) = (*spaceNumber) - 1;
+   (*right) = (*spaceNumber) + 1;
+   PrintBranch(spaceNumber);
+}
+void PrintSpace(int* spaceNumber){
+  for(int i = 0; i< (*spaceNumber); i++){
+    cout << " ";
+  }
+  // cout << "e" << endl;
+}
+void PrintBranch(int* direction){
+  //for(int i = 0; i< (*spaceNumber)-1; i++){
+  (*direction) = (*direction) - 1;
+  PrintSpace(direction);
+  cout << "/";
+  cout << " ";
+  cout << ".";
+  (*direction) = (*direction) + 1;
+}
