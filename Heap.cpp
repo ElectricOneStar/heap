@@ -1,7 +1,11 @@
+/*
+Heap by Andrew Thomas 3/8/2020. This code can input at most 100 numbers between 1 and 1000(separated by spaces) through either user input or file input. The set of numbers are then parced, put into a heap where every head is greater than the child and then outputed from greatest to least. The heap is visualized clearly.
+Cite: Ali Fahkery for algorithm for heap display code.
+ */
 #include <iostream>
 #include <cstring>
 #include <fstream>
-using namespace std;
+using namespace std; // functions
 //char* parce(){
 char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* extraNumbers);
 void maxSize(char* inputHeap, int* wordSize);
@@ -15,7 +19,7 @@ void CorrectVisual(int* sortedHeap, int* level, int* n, int* wordSize, int* j);
 void MyVisual(int* sortedHeap, int* wordSize, int* n, int* j);
 void displayHeap(int* sortedHeap, int length, int count, int i);
 int main(){
-  char input[30];
+  char input[30]; // initialization of variables
   char inputTwo[30];
   char* inputHeap = new char[500];
   int* sortedHeap = new int[100];
@@ -65,11 +69,11 @@ int main(){
   (*wordSize) = 1;
   do{
   cout << "Welcome to Heap. Please choose the input method. A string of numbers(string) or a file(file)" << endl;
-  cin.get(input, 30);
+  cin.get(input, 30); // asks uses if wants file or user input
   cin.clear();
   cin.ignore();
   if(strcmp(input, "file") == 0){
-    cout << "please enter the file name" << endl;
+    cout << "please enter the file name" << endl; // file input
     cin.get(inputTwo, 30);
    cin.clear();
     cin.ignore();
@@ -82,8 +86,8 @@ int main(){
       // cout << "in file" << endl;
 	}
   }
-  if(strcmp(input, "string") == 0){
-    cout << "please eneter a string of numbers" << endl;
+  if(strcmp(input, "string") == 0){ // user input
+    cout << "please eneter a string of numbers separated by spaces" << endl;
     cin.get(inputHeap, 500);
    cin.clear();
     cin.ignore();
@@ -91,11 +95,11 @@ int main(){
       }
   }
   while(strcmp(input, "file") != 0 && strcmp(input, "string") != 0);
-  maxSize( inputHeap, wordSize);
-  createHeap(inputHeap, index, parcedChar, counterOne, wordCounter, sortedHeap, wordSize, counterTwo, sortCounter, extraNumbers, ones, twos, threes, reindex);
+  maxSize( inputHeap, wordSize); // finds the size of the heap
+  createHeap(inputHeap, index, parcedChar, counterOne, wordCounter, sortedHeap, wordSize, counterTwo, sortCounter, extraNumbers, ones, twos, threes, reindex); // creates the heap
   cout << "visual" << endl;
   int length = (*wordSize);
-  displayHeap( sortedHeap, length, 0, 1);
+  displayHeap( sortedHeap, length, 0, 1); // vizualizes the heap
   //MyVisual( sortedHeap, wordSize, n, j);
   // CorrectVisual(sortedHeap, level, n, wordSize, j);
   
@@ -103,19 +107,19 @@ int main(){
   (*wordSize) = 1;
   maxSize( inputHeap, wordSize);
  cout << "Output: " << endl;
- correctOutput(sortedHeap, wordSize, maxIndex, repitions, temp);
+ correctOutput(sortedHeap, wordSize, maxIndex, repitions, temp); // ouput and deletes the heap
  return 0;
 }
-char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* sortedHeap, int* wordSize, int* counterTwo, int* sortCounter, int* extraNumbers,  int* ones, int* twos, int* threes, int* reindex){
+char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* sortedHeap, int* wordSize, int* counterTwo, int* sortCounter, int* extraNumbers,  int* ones, int* twos, int* threes, int* reindex){ // creates the heap
   // cout << "BUILD THE HEAP" << endl;
    char* useless = new char;
      while((*index)-1 != (*wordSize)){
- if((*index) == 1){
+       if((*index) == 1){ // if it is the first number print the number
    //cout << (*index) << endl;
 
    //  cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
    (*useless) = (*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers));
-   if((*extraNumbers) == 2){
+   if((*extraNumbers) == 2){ // two digit
      //cout << "2num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
      //cout << "ones" << (*ones) << endl;
@@ -128,7 +132,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      parcedChar[1] = ' ';
      parcedChar[2] = ' ';
    }
-     else if((*extraNumbers) == 3){
+   else if((*extraNumbers) == 3){ // three digit
        // cout << "3num" << endl;
           (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
@@ -144,9 +148,9 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
        parcedChar[2] = ' ';
      (*extraNumbers) = 0;
      }
-     else{
+   else{ // one digit
        //sortedHeap[(*index)] = sortedHeap[(*sortCounter)];
-   sortedHeap[(*index)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48;
+     sortedHeap[(*index)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48; // gets the numbers
      parcedChar[1] = ' ';
      parcedChar[2] = ' ';
      }
@@ -154,7 +158,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
    //sortedHeap[(*index)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48;
  }
  
- else{
+       else{ // if it is not the first number then possible swap
    (*reindex) = (*index);
    (*sortCounter) = (*index);
    //cout << (*sortCounter) << endl;
@@ -162,7 +166,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
    //   cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
      (*useless) = (*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers));
        parcedChar[1] = '\0';
-      while((*extraNumbers) == 0 && sortedHeap[(*sortCounter)/2-1] < (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48 && (*sortCounter) != 1){
+       while((*extraNumbers) == 0 && sortedHeap[(*sortCounter)/2-1] < (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48 && (*sortCounter) != 1){ // there is one digit and swap
 	(*sortCounter) = (*sortCounter) / 2;
 	sortedHeap[(*reindex)-1] = sortedHeap[(*sortCounter)-1];
        sortedHeap[(*sortCounter)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48;
@@ -170,21 +174,21 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      parcedChar[2] = ' ';
      (*reindex) = (*reindex)/2;
       }
-         if((*extraNumbers) == 2){
+       if((*extraNumbers) == 2){ // preparation for 2 digit check
 	   //cout << "2num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
      // cout << "ones" << (*ones) << endl;
      (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
      //cout << "twos" << (*twos) << endl;
 	 }
-	      else if((*extraNumbers) == 3){
+       else if((*extraNumbers) == 3){ // prepartion for 3 digit check
 		//cout << "3num" << endl;
           (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
 	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
      (*threes) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[2]-48;
 	      }
-	 while((*extraNumbers) == 2 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) && (*sortCounter) != 1){
+       while((*extraNumbers) == 2 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) && (*sortCounter) != 1){ // there are two digits and swap is needed
 	   (*sortCounter) = (*sortCounter) / 2;
 	   //  if((*extraNumbers) == 2){
 	   //cout << "2num" << endl;
@@ -203,7 +207,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 	 // (*ones) = 0;
 	 //(*twos) = 0;
 
-	 while((*extraNumbers) == 3 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) + (*threes) && (*sortCounter) != 1){
+       while((*extraNumbers) == 3 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) + (*threes) && (*sortCounter) != 1){ // there is 3 digits and sqap is needed
 	     (*sortCounter) = (*sortCounter)/2;
 	     //    if((*extraNumbers) == 3){
 	     // cout << "3num" << endl;
@@ -224,8 +228,8 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 	 //(*twos) = 0;
 	 // (*threes) = 0;
 
-	 if((*index) == (*sortCounter)){
-	   	     if((*extraNumbers) == 3){
+       if((*index) == (*sortCounter)){ // there is no swap needed
+	 if((*extraNumbers) == 3){ // print the 3 digit number at the end
 		       // cout << "3num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
@@ -238,7 +242,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      // (*twos) = 0;
      // (*threes) = 0;
 	     }
-		     else if((*extraNumbers) == 2){
+		     else if((*extraNumbers) == 2){ // print the 2 digit number at the end
 		       //cout << "2num" << endl;
      //parcedChar[2] = '\0';
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
@@ -250,7 +254,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      //(*ones) = 0;
      // (*twos) = 0;
 		     }
-		     else{
+		     else{ // print the one digit number at the end
 		       //	sortedHeap[(*index)-1] = sortedHeap[(*sortCounter)-1];
        sortedHeap[(*sortCounter)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48;
      parcedChar[1] = ' ';
@@ -261,7 +265,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 	 }
 
 	 
-	 (*extraNumbers) = 0;
+       (*extraNumbers) = 0; // reset the counters
      }
       (*counterTwo) = 0;
       
@@ -272,7 +276,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      //cout << "visual" << endl;
      //PrintVisual(i sortedHeap, spaceNumber);
 }
-char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* extraNumbers){
+char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* extraNumbers){ // this funcitons returns a parced character ranging from 1 - 999
   parcedChar[0] = '\0';
   (*counterOne) = 0;
    for(int i = 0; i < strlen(inputHeap); i++){
@@ -280,7 +284,7 @@ char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int*
       //      if(inputHeap[i] == '\0'){
       //   return parcedChar;
       // }
-     if(inputHeap[i] != ' ' && (*wordCounter) != 3){
+     if(inputHeap[i] != ' ' && (*wordCounter) != 3){ // there is not a space so store a number
 	   parcedChar[(*wordCounter)] = inputHeap[i];
 	   //	   cout << "HereThere" << endl;
 	   (*wordCounter)++;
@@ -298,14 +302,14 @@ char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int*
        // cout << "Here2" << endl;
        (*counterOne)++;
      
-     if((*counterOne) == (*index)){
+       if((*counterOne) == (*index)){ // this is the number that needs to be stored
        //cout << "Here3" << endl;
        //(*index)++;
        (*counterOne) = -1;
        (*wordCounter) = 0;
        
        // parcedInt =
-       return parcedChar;
+       return parcedChar; // return the specific number/char
      }
      else{
        //cout << "Here4" << endl;
@@ -322,14 +326,14 @@ char* parce(char* inputHeap, int* index, char* parcedChar, int* counterOne, int*
    return parcedChar;
 	// }
 }
-void maxSize(char* inputHeap, int* wordSize){
+void maxSize(char* inputHeap, int* wordSize){ // finds the size of the heap
   for(int i = 0; i < strlen(inputHeap); i++){
          if(inputHeap[i] == ' '){
-	   (*wordSize)++;
+	   (*wordSize)++; // increments a counter every time a space is hit
 	 }
   }
 }
-void PrintHeap(int* sortedHeap, int* counterTwo, int* index){
+void PrintHeap(int* sortedHeap, int* counterTwo, int* index){ // I don't use this funciton
 
   while((*counterTwo) != (*index)){
     // cout << (*counterTwo) << endl;
@@ -348,7 +352,7 @@ int* SizeofHeap(int* sortedHeap, int* heapSize){
   return heapSize;
 }
 */
-void PrintVisual(int* sortedHeap, int* spaceNumber, int* visualCounter, int* left, int* right, int* rowCounter){
+void PrintVisual(int* sortedHeap, int* spaceNumber, int* visualCounter, int* left, int* right, int* rowCounter){ // I don't use this funciton
   //(*spaceNumber) = (*spaceNumber) - 1;
   if((*spaceNumber) == 10){
     PrintSpace(spaceNumber);
@@ -394,13 +398,13 @@ void PrintVisual(int* sortedHeap, int* spaceNumber, int* visualCounter, int* lef
    PrintVisual(sortedHeap, left, visualCounter, left, right, rowCounter);
      }
      }
-void PrintSpace(int* spaceNumber){
+void PrintSpace(int* spaceNumber){ // prints a number of spaces NOT USED
   for(int i = 0; i< (*spaceNumber); i++){
     cout << " ";
   }
   // cout << "e" << endl;
 }
-void PrintBranch(int* direction, int* rowCounter){
+void PrintBranch(int* direction, int* rowCounter){ // prints a branch NOT USED 
   for(int i = 0; i< (*rowCounter); i++){
     //(*direction) = (*direction) - 1;
   if(i == 0){
@@ -425,7 +429,7 @@ void PrintBranch(int* direction, int* rowCounter){
   }
   
 }
-void correctOutput(int* sortedHeap, int* wordCounter, int* maxIndex, int* repitions, int* temp){
+void correctOutput(int* sortedHeap, int* wordCounter, int* maxIndex, int* repitions, int* temp){ // I don't use this funciton
   //PrintHeap( sortedHeap, maxIndex, wordCounter);
   //  cout << (*wordCounter) << endl;
   //cout << (*maxIndex) << endl;
@@ -463,7 +467,7 @@ void correctOutput(int* sortedHeap, int* wordCounter, int* maxIndex, int* repiti
 correctOutput(     sortedHeap,      wordCounter,      maxIndex,      repitions,      temp);
  
  }
-void CorrectVisual(int* sortedHeap, int* level, int* n, int* wordSize, int* j){
+void CorrectVisual(int* sortedHeap, int* level, int* n, int* wordSize, int* j){ // // I don't use this funciton
   //cout << "here" << endl;
   if((*n) == 1){
       cout << sortedHeap[(*n)-1] << endl;
@@ -509,7 +513,7 @@ void CorrectVisual(int* sortedHeap, int* level, int* n, int* wordSize, int* j){
 CorrectVisual(sortedHeap, level, n, wordSize, j);
     }
       }
-void MyVisual(int* sortedHeap, int* wordSize, int* n, int* j){
+void MyVisual(int* sortedHeap, int* wordSize, int* n, int* j){ // I don't use this funciton
   int* left = new int;
     (*left) = 2*(*n);
     int* right = new int;
@@ -538,10 +542,10 @@ void MyVisual(int* sortedHeap, int* wordSize, int* n, int* j){
   }
   // int* current = new int
 }
-void displayHeap(int* sortedHeap, int length, int count, int i){
+void displayHeap(int* sortedHeap, int length, int count, int i){ // I use this function to correctly display the heap
   int left = 2*i;
   int right = 2*i+1;
-  if(right <= length){
+  if(right <= length){ // right child exist so recurse
     displayHeap(sortedHeap, length, count+1, right);
   }
   int current = count;
@@ -549,8 +553,8 @@ void displayHeap(int* sortedHeap, int length, int count, int i){
     cout << "    ";
     count--;
   }
-  cout << sortedHeap[i-1] << endl;
-  if(left <= length){
+  cout << sortedHeap[i-1] << endl; // print current with some number of idenetation
+  if(left <= length){ // left child exists so recurse
     displayHeap(sortedHeap, length, current + 1, left);
   }
 }
