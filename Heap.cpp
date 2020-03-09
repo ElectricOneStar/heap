@@ -3,6 +3,7 @@ Heap by Andrew Thomas 3/8/2020. This code can input at most 100 numbers between 
 Cite: Ali Fahkery for algorithm for heap display code.
  */
 #include <iostream>
+#include <cstdlib>
 #include <cstring>
 #include <fstream>
 using namespace std; // functions
