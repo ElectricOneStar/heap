@@ -47,6 +47,7 @@ int main(){
   //void CorrectVisual(int* sortedHeap, int* level);
   int* n = new int;
   int* j = new int;
+
   (*j) = 0;
   (*n) = 1;
   (*level) = 0;
@@ -72,13 +73,13 @@ int main(){
     cin.get(inputTwo, 30);
    cin.clear();
     cin.ignore();
-    cout << inputTwo << endl;
+    //cout << inputTwo << endl;
     ifstream rfile;
     rfile.open(inputTwo);
     if(rfile.is_open()){
       rfile.getline(inputHeap, 500);
-      cout << inputHeap << endl;
-      cout << "in file" << endl;
+      //     cout << inputHeap << endl;
+      // cout << "in file" << endl;
 	}
   }
   if(strcmp(input, "string") == 0){
@@ -101,61 +102,25 @@ int main(){
   //thisVisual();
   (*wordSize) = 1;
   maxSize( inputHeap, wordSize);
-  // PrintVisual(sortedHeap, spaceCounter, visualCounter, left, right, rowCounter);
-  // cout << (*wordSize) << endl;
-  
-   //   (*index)++;
-   /*
-   cout << (*index) << endl;
-  cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
-  /*
-  (*index)++;
-   cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
-   (*index)++;
-    cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter);
-  */
-   //(*parcedChar) = NULL;
-  //parcedChar[0] = '\0';
-  (*index) = 1;
- cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0];
-  //cout << ".";
  cout << "Output: " << endl;
  correctOutput(sortedHeap, wordSize, maxIndex, repitions, temp);
  return 0;
 }
 char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne, int* wordCounter, int* sortedHeap, int* wordSize, int* counterTwo, int* sortCounter, int* extraNumbers,  int* ones, int* twos, int* threes, int* reindex){
-  cout << "BUILD THE HEAP" << endl;
-  //cout << (*wordSize) << endl;
-  // sortedHeap[(*index)] = 1;
-  //(*index)++;
-  //  cout << sizeof(sortedHeap) / 8 << endl;
+  // cout << "BUILD THE HEAP" << endl;
+   char* useless = new char;
      while((*index)-1 != (*wordSize)){
-       /*
-       cout << "tree: ";
-      PrintHeap( sortedHeap, counterTwo, index);
-      (*counterTwo) = 0;
-       */
-       cout << "size of tree: ";
-      // cout << sizeof(sortedHeap) / 8 << endl;
-      // cout << sizeof(sortedHeap)/sizeof(sortedHeap[0]) << endl;
- cout << "and index: ";
-  cout << (*index) << endl;
- /*
- cout << "char: ";
-   cout << parce(inputHeap, index - 1,  parcedChar, counterOne, wordCounter) << endl;
- sortedHeap[(*index)] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter));
- */
  if((*index) == 1){
    //cout << (*index) << endl;
 
-   cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
-   
+   //  cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
+   (*useless) = (*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers));
    if((*extraNumbers) == 2){
-     cout << "2num" << endl;
+     //cout << "2num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
-     cout << "ones" << (*ones) << endl;
+     //cout << "ones" << (*ones) << endl;
      (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
-     cout << "twos" << (*twos) << endl;
+     // cout << "twos" << (*twos) << endl;
        sortedHeap[(*index)-1] = (*ones) + (*twos);
        //  (*ones) = 0;
        //(*twos) = 0;
@@ -164,7 +129,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      parcedChar[2] = ' ';
    }
      else if((*extraNumbers) == 3){
-     cout << "3num" << endl;
+       // cout << "3num" << endl;
           (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
 	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
@@ -192,9 +157,10 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
  else{
    (*reindex) = (*index);
    (*sortCounter) = (*index);
-   cout << (*sortCounter) << endl;
+   //cout << (*sortCounter) << endl;
    // cout << sortedHeap[(*sortCounter)-1] << endl;
-      cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
+   //   cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
+     (*useless) = (*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers));
        parcedChar[1] = '\0';
       while((*extraNumbers) == 0 && sortedHeap[(*sortCounter)/2-1] < (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48 && (*sortCounter) != 1){
 	(*sortCounter) = (*sortCounter) / 2;
@@ -205,14 +171,14 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      (*reindex) = (*reindex)/2;
       }
          if((*extraNumbers) == 2){
-     cout << "2num" << endl;
+	   //cout << "2num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
-     cout << "ones" << (*ones) << endl;
+     // cout << "ones" << (*ones) << endl;
      (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
-     cout << "twos" << (*twos) << endl;
+     //cout << "twos" << (*twos) << endl;
 	 }
 	      else if((*extraNumbers) == 3){
-     cout << "3num" << endl;
+		//cout << "3num" << endl;
           (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
 	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
@@ -221,12 +187,12 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 	 while((*extraNumbers) == 2 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) && (*sortCounter) != 1){
 	   (*sortCounter) = (*sortCounter) / 2;
 	   //  if((*extraNumbers) == 2){
-     cout << "2num" << endl;
+	   //cout << "2num" << endl;
      //parcedChar[2] = '\0';
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
-     cout << "ones" << (*ones) << endl;
+     // cout << "ones" << (*ones) << endl;
      (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
-     cout << "twos" << (*twos) << endl;
+     //cout << "twos" << (*twos) << endl;
      sortedHeap[(*reindex)-1] = sortedHeap[(*sortCounter)-1];
      sortedHeap[(*sortCounter)-1] = (*ones) + (*twos);
      //       (*ones) = 0;
@@ -240,7 +206,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 	 while((*extraNumbers) == 3 && sortedHeap[(*sortCounter)/2-1] < (*ones) + (*twos) + (*threes) && (*sortCounter) != 1){
 	     (*sortCounter) = (*sortCounter)/2;
 	     //    if((*extraNumbers) == 3){
-     cout << "3num" << endl;
+	     // cout << "3num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
 	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
@@ -260,7 +226,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 
 	 if((*index) == (*sortCounter)){
 	   	     if((*extraNumbers) == 3){
-     cout << "3num" << endl;
+		       // cout << "3num" << endl;
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
 	  //cout << "ones" << (*ones) << endl;
 	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
@@ -273,12 +239,12 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
      // (*threes) = 0;
 	     }
 		     else if((*extraNumbers) == 2){
-     cout << "2num" << endl;
+		       //cout << "2num" << endl;
      //parcedChar[2] = '\0';
      (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
-     cout << "ones" << (*ones) << endl;
+     //cout << "ones" << (*ones) << endl;
      (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
-     cout << "twos" << (*twos) << endl;
+     //cout << "twos" << (*twos) << endl;
      //sortedHeap[(*index)-1] = sortedHeap[(*sortCounter)-1];
      sortedHeap[(*sortCounter)-1] = (*ones) + (*twos);
      //(*ones) = 0;
@@ -296,67 +262,7 @@ char* createHeap(char* inputHeap, int* index, char* parcedChar, int* counterOne,
 
 	 
 	 (*extraNumbers) = 0;
-
-      // while((*extraNumbers) == 3 && sortedHeap[(*sortCounter)-1] < (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumber != 0){
-      //(*sortCounter)--;
-      // }
-
-   //      cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
-
-	 //cout << "count"<< (*sortCounter) << endl;
-   //for(int i = (*index)-1; i != (*sortCounter); i--){
-   // sortedHeap[i] = sortedHeap[i-1];
-   //}
-   //   cout << "Useless" << parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers) << endl;
-	 /*
-	 if((*extraNumbers) == 2){
-     cout << "2num" << endl;
-     //parcedChar[2] = '\0';
-     (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*10;
-     cout << "ones" << (*ones) << endl;
-     (*twos) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48;
-     cout << "twos" << (*twos) << endl;
-     sortedHeap[(*index)-1] = sortedHeap[(*sortCounter)-1];
-     sortedHeap[(*sortCounter)-1] = (*ones) + (*twos);
-       (*ones) = 0;
-       (*twos) = 0;
-     (*extraNumbers) = 0;
-     //  parcedChar[1] = ' ';
-     //parcedChar[2] = ' ';
-   }
-     else if((*extraNumbers) == 3){
-     cout << "3num" << endl;
-     (*ones) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[0]-48)*100;
-	  //cout << "ones" << (*ones) << endl;
-	  (*twos) = ((int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[1]-48)*10;
-     (*threes) = (int)parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers)[2]-48;
-          sortedHeap[(*index)-1] = sortedHeap[(*sortCounter)-1];
-	  //cout << "twos" << (*twos) << endl;
-     sortedHeap[(*sortCounter)-1] = (*ones) + (*twos) + (*threes);
-       (*ones) = 0;
-       (*twos) = 0;
-       (*threes) = 0;
-       //parcedChar[1] = '12';
-       //parcedChar[2] = ' ';
-     (*extraNumbers) = 0;
      }
-     else{
-       //    parcedChar[1] = '\0';
-       //parcedChar[2] = ' ';
-            sortedHeap[(*index)-1] = sortedHeap[(*sortCounter)-1];
-       sortedHeap[(*sortCounter)-1] = (int)(*parce(inputHeap, index,  parcedChar, counterOne, wordCounter, extraNumbers))-48;
-     parcedChar[1] = ' ';
-     parcedChar[2] = ' ';
-
-     }
-	 */
-     }
-  //cout << parce(inputHeap, index,  parcedChar, counterOne, wordCounter) << endl;
- //(*counterOne) = 0;
- //(*wordCounter) = 0;
- // sortedHeap[(*index)] = 1;
-       cout << "tree: ";
-      PrintHeap( sortedHeap, counterTwo, index);
       (*counterTwo) = 0;
       
       // cout << (*wordSize) << endl;
