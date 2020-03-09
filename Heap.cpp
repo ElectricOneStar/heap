@@ -76,7 +76,7 @@ int main(){
     ifstream rfile;
     rfile.open(inputTwo);
     if(rfile.is_open()){
-      rfile.getline(inputHeap, 20);
+      rfile.getline(inputHeap, 500);
       cout << inputHeap << endl;
       cout << "in file" << endl;
 	}
@@ -95,8 +95,8 @@ int main(){
   cout << "visual" << endl;
   int length = (*wordSize);
   displayHeap( sortedHeap, length, 0, 1);
-  // CorrectVisual(sortedHeap, level, n, wordSize, j);
   //MyVisual( sortedHeap, wordSize, n, j);
+  // CorrectVisual(sortedHeap, level, n, wordSize, j);
   
   //thisVisual();
   (*wordSize) = 1;
